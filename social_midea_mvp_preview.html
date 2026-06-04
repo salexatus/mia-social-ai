@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIA · Social AI</title>
+
+  <!-- Favicon: símbolo MIA arredondado em gradiente azul/roxo -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300A8FF'/%3E%3Cstop offset='1' stop-color='%237B61FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='4' y='4' width='56' height='56' rx='18' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='26' font-weight='900' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+
+  <!-- Fonte principal: Sora -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --azul:#00A8FF;     /* azul IA */
+      --roxo:#7B61FF;     /* roxo IA */
+      --tech:#080F1A;     /* preto tech */
+      --branco:#FFFFFF;   /* branco */
+      --grad:linear-gradient(135deg,var(--azul),var(--roxo));
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Sora',Arial,sans-serif}
+    body{min-height:100vh;background:var(--tech);color:var(--branco);display:flex;align-items:center;justify-content:center;padding:24px;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 50% 6%,rgba(0,168,255,.32),transparent 32%),radial-gradient(circle at 86% 78%,rgba(123,97,255,.30),transparent 30%),linear-gradient(135deg,#050A12,#080F1A 50%,#05080F);z-index:-2}
+    body:after{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:34px 34px;opacity:.5;z-index:-1}
+
+    .phone{width:390px;max-width:100%;min-height:820px;border:1px solid rgba(255,255,255,.12);border-radius:46px;background:rgba(8,15,26,.9);padding:12px;box-shadow:0 40px 100px rgba(0,0,0,.75),0 0 90px rgba(0,168,255,.18);position:relative}
+    .screen{min-height:796px;border-radius:36px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.09);padding:34px 20px 22px;position:relative;overflow:hidden;backdrop-filter:blur(8px)}
+    .screen:before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:140px;height:24px;background:#02060C;border-radius:0 0 22px 22px;z-index:5}
+    .glow{position:absolute;inset:-80px;background:radial-gradient(circle at center,rgba(0,168,255,.18),transparent 46%);pointer-events:none}
+    .content{position:relative;z-index:2}
+
+    /* Marca + logo MIA */
+    .brand{display:flex;align-items:center;gap:13px;margin:10px 0 22px}
+    .mark{width:60px;height:60px;border-radius:22px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:27px;color:#fff;box-shadow:0 0 40px rgba(0,168,255,.4),inset 0 1px 1px rgba(255,255,255,.4)}
+    .brand h1{font-size:30px;line-height:.95;font-weight:800;letter-spacing:-.5px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .brand p{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:6px;font-weight:600}
+
+    .client{display:inline-flex;align-items:center;gap:7px;background:rgba(0,168,255,.1);border:1px solid rgba(0,168,255,.26);border-radius:999px;padding:8px 13px;color:#9fd9ff;font-weight:700;font-size:11px;text-transform:uppercase;margin-bottom:18px}
+
+    .upload{height:188px;border-radius:30px;border:1.5px dashed rgba(0,168,255,.45);background:linear-gradient(180deg,rgba(0,168,255,.1),rgba(123,97,255,.06));display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;position:relative;overflow:hidden;cursor:pointer;transition:.25s}
+    .upload:hover{transform:translateY(-2px);border-color:var(--azul);box-shadow:0 0 44px rgba(0,168,255,.18)}
+    .upload input{display:none}.upload .icon{font-size:38px;margin-bottom:10px}.upload strong{font-size:18px;font-weight:700}.upload p{font-size:12px;color:rgba(255,255,255,.55);margin-top:6px}
+    .preview-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}.upload.has-image .preview-img{display:block}.upload.has-image .upload-text{position:absolute;bottom:12px;left:12px;right:12px;background:rgba(8,15,26,.66);backdrop-filter:blur(12px);border-radius:20px;padding:10px}
+
+    .tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+    .tab{height:56px;border:none;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);color:#fff;font-weight:700;font-size:14px;cursor:pointer;transition:.2s}
+    .tab.active{background:var(--grad);color:#fff;box-shadow:0 0 32px rgba(0,168,255,.35)}
+
+    .panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:26px;padding:14px;margin-bottom:14px;display:none}.panel.show{display:block;animation:up .22s ease}
+    .panel label{font-size:12px;color:rgba(255,255,255,.6);font-weight:700;text-transform:uppercase}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:9px}
+    .input{width:100%;height:48px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.32);color:#fff;padding:0 12px;outline:none;font-weight:600;transition:.2s}
+    .input:focus,.textarea:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,168,255,.16)}
+    .textarea{width:100%;min-height:76px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.32);color:#fff;padding:12px;outline:none;resize:none;margin-top:9px;font-weight:600}
+
+    .generate{width:100%;height:64px;border:none;border-radius:24px;background:var(--grad);color:#fff;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 0 46px rgba(0,168,255,.4);display:flex;align-items:center;justify-content:center;gap:10px;margin:12px 0 16px;transition:.2s}
+    .generate:active{transform:scale(.98)}
+
+    .loading{display:none;text-align:center;padding:20px}.spinner{width:46px;height:46px;border:4px solid rgba(255,255,255,.12);border-top-color:var(--azul);border-radius:50%;margin:0 auto 12px;animation:spin 1s linear infinite}.loading strong{font-weight:700}.loading p{font-size:13px;color:rgba(255,255,255,.58);margin-top:4px}
+
+    .results{display:none}.results.show{display:block;animation:up .3s ease}
+    .result-title{display:flex;align-items:center;justify-content:space-between;margin:6px 0 12px}.result-title h2{font-size:18px;font-weight:700}
+    .badge{font-size:10px;font-weight:800;color:#9fd9ff;border:1px solid rgba(0,168,255,.3);background:rgba(0,168,255,.09);border-radius:999px;padding:7px 9px}
+
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .art{border-radius:24px;background:linear-gradient(180deg,#101a2b,#06090F);border:1px solid rgba(255,255,255,.1);overflow:hidden;position:relative;min-height:250px;box-shadow:0 20px 44px rgba(0,0,0,.45)}
+    .art.story{aspect-ratio:9/16}.art.feed{aspect-ratio:4/5}
+    .art:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 74%,rgba(123,97,255,.42),transparent 46%),radial-gradient(circle at 50% 12%,rgba(0,168,255,.3),transparent 40%)}
+    .art .mini-photo{position:absolute;left:14px;right:14px;bottom:62px;height:86px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .art .mini-photo img{width:100%;height:100%;object-fit:cover}
+    .art h3{position:absolute;left:12px;right:12px;top:22px;text-align:center;font-size:21px;line-height:.92;font-weight:800;text-transform:uppercase}
+    .art p{position:absolute;left:12px;right:12px;top:78px;text-align:center;font-size:10px;color:#9fd9ff;font-weight:700}
+    .art button{position:absolute;left:12px;right:12px;bottom:13px;height:38px;border:none;border-radius:15px;background:var(--grad);color:#fff;font-weight:800;cursor:pointer}
+
+    .support{margin-top:14px;width:100%;height:48px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-weight:700;cursor:pointer}
+
+    @keyframes spin{to{transform:rotate(360deg)}}@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <div class="glow"></div>
+      <div class="content">
+        <div class="brand">
+          <div class="mark">M</div>
+          <div><h1>MIA</h1><p>Social AI</p></div>
+        </div>
+        <div class="client">✦ App personalizado da empresa</div>
+
+        <label class="upload" id="uploadBox">
+          <input type="file" id="fileInput" accept="image/*" />
+          <img class="preview-img" id="previewImg" />
+          <div class="upload-text">
+            <div class="icon">📸</div>
+            <strong>Tirar foto ou enviar imagem</strong>
+            <p>Produto, prato, ambiente ou qualquer item da empresa</p>
+          </div>
+        </label>
+
+        <div class="tabs">
+          <button class="tab active" data-mode="promo">PROMOÇÃO</button>
+          <button class="tab" data-mode="divulgacao">DIVULGAÇÃO</button>
+        </div>
+
+        <div class="panel show" id="promoPanel">
+          <label>Dados da promoção</label>
+          <div class="grid2">
+            <input class="input" id="price" placeholder="Valor Ex: R$ 29,90" />
+            <input class="input" id="validity" placeholder="Ex: Hoje" />
+          </div>
+          <textarea class="textarea" id="details" placeholder="Ex: Almoço no fogão a lenha, bebida gelada, ambiente familiar..."></textarea>
+        </div>
+
+        <div class="panel" id="divulgacaoPanel">
+          <label>Texto opcional da divulgação</label>
+          <textarea class="textarea" id="divText" placeholder="Ex: Venha conhecer nossa estrutura, ambiente familiar e atendimento especial..."></textarea>
+        </div>
+
+        <button class="generate" onclick="generateArts()">⚡ GERAR FEED E STORIES</button>
+
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+          <strong>Criando artes com IA...</strong>
+          <p>Aplicando identidade visual, copy e composição premium.</p>
+        </div>
+
+        <div class="results" id="results">
+          <div class="result-title"><h2>Artes geradas</h2><span class="badge">Feed + Story</span></div>
+          <div class="cards">
+            <div class="art feed">
+              <h3 id="feedTitle">Promoção Especial</h3>
+              <p id="feedSub">Arte feed pronta para postagem</p>
+              <div class="mini-photo"><span id="feedIcon">Imagem</span><img id="feedImg" style="display:none" /></div>
+              <button>BAIXAR FEED</button>
+            </div>
+            <div class="art story">
+              <h3 id="storyTitle">Promoção Especial</h3>
+              <p id="storySub">Story pronto para vender</p>
+              <div class="mini-photo"><span id="storyIcon">Imagem</span><img id="storyImg" style="display:none" /></div>
+              <button>BAIXAR STORY</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="support">💬 Falar com suporte</button>
+      </div>
+    </div>
+  </div>
+<script>
+  let mode = 'promo';
+  let uploadedImage = '';
+  const fileInput = document.getElementById('fileInput');
+  const uploadBox = document.getElementById('uploadBox');
+  const previewImg = document.getElementById('previewImg');
+  fileInput.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      uploadedImage = ev.target.result;
+      previewImg.src = uploadedImage;
+      uploadBox.classList.add('has-image');
+    };
+    reader.readAsDataURL(file);
+  });
+  document.querySelectorAll('.tab').forEach(btn=>{
+    btn.onclick=()=>{
+      document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      mode=btn.dataset.mode;
+      document.getElementById('promoPanel').classList.toggle('show', mode==='promo');
+      document.getElementById('divulgacaoPanel').classList.toggle('show', mode==='divulgacao');
+    }
+  });
+  function generateArts(){
+    document.getElementById('results').classList.remove('show');
+    document.getElementById('loading').style.display='block';
+    setTimeout(()=>{
+      const price = document.getElementById('price').value || 'Oferta especial';
+      const validity = document.getElementById('validity').value || 'por tempo limitado';
+      const details = document.getElementById('details').value || 'Aproveite essa oportunidade especial.';
+      const divText = document.getElementById('divText').value || 'Conheça nossos produtos e serviços.';
+      const title = mode === 'promo' ? price : 'Divulgação Especial';
+      const sub = mode === 'promo' ? validity + ' • ' + details : divText;
+      document.getElementById('feedTitle').innerText = title;
+      document.getElementById('storyTitle').innerText = title;
+      document.getElementById('feedSub').innerText = sub.substring(0,58);
+      document.getElementById('storySub').innerText = sub.substring(0,58);
+      if(uploadedImage){
+        ['feedImg','storyImg'].forEach(id=>{document.getElementById(id).src=uploadedImage;document.getElementById(id).style.display='block'});
+        ['feedIcon','storyIcon'].forEach(id=>document.getElementById(id).style.display='none');
+      }
+      document.getElementById('loading').style.display='none';
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({behavior:'smooth',block:'nearest'});
+    },1300);
+  }
+</script>
+</body>
+</html>
