@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MIA">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00A8FF"/>
+      <stop offset="1" stop-color="#7B61FF"/>
+    </linearGradient>
+  </defs>
+  <!-- squircle preto com borda gradiente sutil (estilo da logo MIA) -->
+  <rect x="24" y="24" width="464" height="464" rx="116" fill="#05070D"/>
+  <rect x="26" y="26" width="460" height="460" rx="114" fill="none" stroke="url(#g)" stroke-width="4" opacity="0.9"/>
+  <!-- wordmark "mia" em traços arredondados, gradiente azul->roxo -->
+  <g fill="none" stroke="url(#g)" stroke-width="42" stroke-linecap="round" stroke-linejoin="round">
+    <!-- m -->
+    <path d="M120 330 V250"/>
+    <path d="M120 268 a34 34 0 0 1 68 0 V330"/>
+    <path d="M188 268 a34 34 0 0 1 68 0 V330"/>
+    <!-- i -->
+    <path d="M300 250 V330"/>
+    <!-- a -->
+    <path d="M392 292 a34 34 0 1 0 0 2 V330"/>
+  </g>
+  <!-- pingo do i -->
+  <circle cx="300" cy="196" r="22" fill="url(#g)"/>
+</svg>

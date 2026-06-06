@@ -1,0 +1,14 @@
+{
+  "name": "MIA · Social AI",
+  "short_name": "MIA",
+  "description": "Gere artes de Feed e Stories com IA a partir de uma foto.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#080F1A",
+  "theme_color": "#080F1A",
+  "icons": [
+    { "src": "icon-192.png", "type": "image/png", "sizes": "192x192", "purpose": "any" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any" }
+  ]
+}
