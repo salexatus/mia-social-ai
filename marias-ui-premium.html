@@ -25,6 +25,9 @@ body{min-height:100vh;display:flex;justify-content:center;
 .cards-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .gen-btn{height:62px;border-radius:18px;border:none;cursor:pointer;font-size:17px;font-weight:700;letter-spacing:.4px;color:#fff;background:linear-gradient(135deg,var(--brand-primary),#9b5de5);box-shadow:0 10px 30px rgba(232,75,138,.32);transition:.2s}
 .gen-btn:hover{transform:translateY(-2px);box-shadow:0 16px 42px rgba(232,75,138,.45);filter:brightness(1.05)}
+.gen-grid-3{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:10px}
+.gen-grid-3 .gen-btn{font-size:15px}
+.gen-btn--both{background:linear-gradient(135deg,#9b5de5,var(--brand-primary));box-shadow:0 12px 36px rgba(155,93,229,.42);white-space:nowrap}
 </style></head>
 <body><div class="app">
 <header class="app-header--premium">
@@ -39,6 +42,6 @@ body{min-height:100vh;display:flex;justify-content:center;
   <button class="tab--premium">Divulgação</button>
  </div>
  <div class="hero"><div></div><div></div><div></div></div>
- <div class="cards-2"><button class="gen-btn">STORY</button><button class="gen-btn">FEED</button></div>
+ <div class="gen-grid-3"><button class="gen-btn">STORY</button><button class="gen-btn gen-btn--both">FEED + STORY</button><button class="gen-btn">FEED</button></div>
 </section>
 </div></body></html>
