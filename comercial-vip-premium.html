@@ -1,0 +1,74 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Comercial VIP — Social AI (prévia premium)</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Sora,system-ui,sans-serif}
+:root{--brand-primary:#00A8FF}
+body{min-height:100vh;display:flex;justify-content:center;color:#fff;
+ background:radial-gradient(circle at 50% -8%,color-mix(in srgb,var(--brand-primary) 16%,transparent),transparent 44%),radial-gradient(circle at 95% 92%,rgba(123,97,255,.14),transparent 40%),linear-gradient(160deg,#04131b,#070d13 55%,#05090f)}
+.starfield{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.app{position:relative;z-index:1;width:430px;max-width:100%;padding:0 22px 40px}
+.head{display:flex;flex-direction:column;align-items:center;gap:6px;padding:30px 0 10px;text-align:center}
+.mark{width:84px;height:84px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;background:linear-gradient(135deg,var(--brand-primary),#7b61ff);box-shadow:0 12px 34px rgba(0,168,255,.35)}
+.bname{font-size:25px;font-weight:600;background:linear-gradient(90deg,var(--brand-primary),#7b61ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-top:4px}
+.btag{font-size:12px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.stack{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.screen-title{font-size:23px;font-weight:700;text-align:center}
+.screen-sub{font-size:13px;color:rgba(255,255,255,.55);text-align:center;margin-bottom:4px}
+.step{display:flex;align-items:center;gap:10px;margin:6px 2px 0}
+.step-num{width:26px;height:26px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:linear-gradient(135deg,var(--brand-primary),#7b61ff);box-shadow:0 4px 14px rgba(0,168,255,.3)}
+.step-text{font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.66)}
+.upload{display:flex;flex-direction:column;align-items:center;gap:8px;min-height:190px;padding:26px 18px;border-radius:24px;text-align:center;background:rgba(0,168,255,.05);border:2px dashed color-mix(in srgb,var(--brand-primary) 55%,transparent);animation:pulse 3.4s ease-in-out infinite}
+.upload-ic{width:62px;height:62px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--brand-primary),#7b61ff);box-shadow:0 8px 26px rgba(0,168,255,.34)}
+.upload strong{font-size:17px}.upload small{font-size:12px;color:rgba(255,255,255,.55)}
+.upload-cta{margin-top:6px;padding:9px 18px;border-radius:12px;font-size:13px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16)}
+.thumbs{display:flex;gap:10px}.thumb{width:60px;height:60px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(135deg,#13324a,#0c2238)}
+.thumb.on{border-color:var(--brand-primary);box-shadow:0 0 0 2px color-mix(in srgb,var(--brand-primary) 60%,transparent)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tab{height:54px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(255,255,255,.85);font-weight:600;font-size:15px}
+.tab.on{background:linear-gradient(135deg,var(--brand-primary),#7b61ff);border-color:transparent;box-shadow:0 8px 28px rgba(0,168,255,.35)}
+.glass{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:22px;backdrop-filter:blur(14px);padding:16px;display:flex;flex-direction:column;gap:10px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fd{width:100%;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:#fff;padding:13px 16px;font-size:15px;font-family:inherit}
+.fd::placeholder{color:rgba(255,255,255,.4)}
+.fcards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.fc{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 6px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.82)}
+.fc.on{border-color:transparent;color:#fff;background:linear-gradient(135deg,color-mix(in srgb,var(--brand-primary) 28%,transparent),rgba(123,97,255,.22));box-shadow:0 0 0 1.5px var(--brand-primary)}
+.shape{border:2px solid currentColor;border-radius:4px}.s-feed{width:26px;height:32px}.s-story{width:20px;height:36px}.s-both{width:30px;height:32px;border-style:double}
+.fc b{font-size:14px}.fc span{font-size:11px;color:rgba(255,255,255,.55)}
+.cta{height:66px;border:none;border-radius:20px;font-size:18px;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--brand-primary),#7b61ff);box-shadow:0 12px 36px rgba(0,168,255,.4);animation:glow 2.8s ease-in-out infinite}
+.bolt{font-size:20px;filter:drop-shadow(0 0 6px rgba(255,255,255,.5))}
+.hist{display:block;text-align:center;padding:12px;border-radius:14px;color:rgba(255,255,255,.6);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);text-decoration:none;font-size:14px}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,168,255,0)}50%{box-shadow:0 0 28px 0 rgba(0,168,255,.14)}}
+@keyframes glow{0%,100%{box-shadow:0 12px 36px rgba(0,168,255,.4)}50%{box-shadow:0 12px 48px rgba(123,97,255,.55)}}
+</style></head><body>
+<canvas class="starfield" id="sf"></canvas>
+<div class="app">
+ <header class="head"><div class="mark">V</div><div class="bname">Comercial VIP</div><div class="btag">Social AI</div></header>
+ <section class="stack">
+  <div class="screen-title">Crie sua arte em segundos</div>
+  <div class="screen-sub">Foto do produto → IA → Feed &amp; Story</div>
+  <div class="step"><span class="step-num">1</span><span class="step-text">Envie a foto</span></div>
+  <label class="upload"><span class="upload-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M8 8l4-4 4 4"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></span><strong>Tirar foto ou enviar imagem</strong><small>Produto, prato, ambiente ou qualquer item da empresa</small><span class="upload-cta">Selecionar imagem</span></label>
+  <div class="thumbs"><div class="thumb on"></div><div class="thumb"></div><div class="thumb"></div></div>
+  <div class="step"><span class="step-num">2</span><span class="step-text">Escolha o objetivo</span></div>
+  <div class="tabs"><button class="tab on">Promoção</button><button class="tab">Divulgação</button></div>
+  <div class="step"><span class="step-num">3</span><span class="step-text">Preencha os dados</span></div>
+  <div class="glass"><div class="g2"><input class="fd" placeholder="Valor Ex: R$ 29,90"/><input class="fd" placeholder="Validade Ex: Hoje"/></div><textarea class="fd" placeholder="Detalhes da promoção..."></textarea></div>
+  <div class="step"><span class="step-num">4</span><span class="step-text">Escolha o formato</span></div>
+  <div class="fcards">
+   <button class="fc on"><span class="shape s-feed"></span><b>Feed</b><span>4:5</span></button>
+   <button class="fc"><span class="shape s-story"></span><b>Story</b><span>9:16</span></button>
+   <button class="fc"><span class="shape s-both"></span><b>Ambos</b><span>os dois</span></button>
+  </div>
+  <button class="cta"><span class="bolt">⚡</span> Gerar Arte</button>
+  <a class="hist" href="#">↩ Ver histórico</a>
+ </section>
+</div>
+<script>
+const c=document.getElementById('sf'),x=c.getContext('2d');let w,h,st=[],sh=[];const dpr=Math.min(devicePixelRatio||1,2);
+function rs(){w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);st=[];const n=Math.min(70,w*h/12000|0);for(let i=0;i<n;i++)st.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.3,a:Math.random()*.6+.2,va:(Math.random()-.5)*.01,vy:Math.random()*.12+.02})}
+let l=0;function f(t){requestAnimationFrame(f);if(t-l<33)return;l=t;x.clearRect(0,0,w,h);for(const s of st){s.y+=s.vy;if(s.y>h)s.y=0;s.a+=s.va;if(s.a<.15||s.a>.85)s.va*=-1;x.globalAlpha=s.a;x.fillStyle='#cfe8ff';x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fill()}if(Math.random()<.005&&sh.length<2)sh.push({x:Math.random()*w*.8,y:Math.random()*h*.4,vx:6+Math.random()*4,vy:3+Math.random()*2,life:1});for(let i=sh.length-1;i>=0;i--){const m=sh[i];m.x+=m.vx;m.y+=m.vy;m.life-=.012;if(m.life<=0||m.x>w||m.y>h){sh.splice(i,1);continue}x.globalAlpha=Math.max(0,m.life);const g=x.createLinearGradient(m.x,m.y,m.x-m.vx*6,m.y-m.vy*6);g.addColorStop(0,'rgba(180,220,255,.9)');g.addColorStop(1,'rgba(180,220,255,0)');x.strokeStyle=g;x.lineWidth=2;x.beginPath();x.moveTo(m.x,m.y);x.lineTo(m.x-m.vx*6,m.y-m.vy*6);x.stroke()}x.globalAlpha=1}
+rs();addEventListener('resize',rs);requestAnimationFrame(f);
+</script></body></html>
